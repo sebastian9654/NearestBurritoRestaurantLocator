@@ -5,7 +5,16 @@ import argparse
 
 from dataclasses import dataclass
 
-def dijkstra(graph, start) -> list[str]:
+def dijkstra(graph: nx.Graph, start: str) -> list[str]:
+    """Dijkstra's Algorithm. Used to find shortest path within a graph from a start point.
+
+    Args:
+        graph (graph): Graph used to traverse and find shortest path
+        start (str): Start Node
+
+    Returns:
+        list[str]: returns a list with the shortest paths
+    """
     distance = {node: float('infinity') for node in graph}
     distance[start] = 0
     priority_queue = [(0, start)]
@@ -33,6 +42,29 @@ def dijkstra(graph, start) -> list[str]:
 
 @dataclass
 class Locations:
+    """Data Class used to store all variables pertaining to this project such as the list of restaurants (edges and locations) each in their own list, list of 
+    all of the locations and the address associated with them. Allows for quick and easy access to all important info.
+
+    Attributes: 
+        chipotle_edges: (list)
+
+        willys_edges (list)
+
+        moes_edges (list)
+
+        all_edges (list)
+
+        chipotle_locations (list)
+
+        willys_locations (list)
+
+        moes_locations (list)
+
+        all_locations (list)
+
+        locations_with_addresses (dictionary)
+    """
+
     chipotle_edges = [
         ('GSU-DOWNTOWN', 'C-1', {'weight': 6}),
         ('GSU-DOWNTOWN', 'C-3', {'weight': 10}),
@@ -80,7 +112,15 @@ class Locations:
     }
 
 
-def visualize_graph(graph):
+def visualize_graph(graph) -> None:
+    """Plots the graph using MatPlotLib library. 
+
+    Args:
+        graph (graph): Input graph from NetworkX library that contains edges and vertices, mimicking the actual graph data structure. Implemented using an
+        adjacency list.
+    Returns:
+        None
+    """
     pos = nx.spring_layout(graph)
     nx.draw(graph, pos, with_labels=True, font_weight='bold')
     labels = nx.get_edge_attributes(graph, 'weight')
