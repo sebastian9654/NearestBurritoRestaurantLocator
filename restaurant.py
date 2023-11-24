@@ -79,6 +79,7 @@ class Locations:
         'M-2' : 'Dunwoody Village',
     }
 
+
 def visualize_graph(graph):
     pos = nx.spring_layout(graph)
     nx.draw(graph, pos, with_labels=True, font_weight='bold')
@@ -147,6 +148,7 @@ def main():
     if args.debug:
         for location, distance in distances.items():
             print(f"[DEBUG MODE] The distance from {start_location} to {location} is {distance} units.")
+
 
 if __name__ == "__main__":
     main()
