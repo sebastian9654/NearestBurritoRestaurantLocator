@@ -3,6 +3,7 @@ import matplotlib.pyplot as plt
 import heapq
 import argparse
 
+from locations import Locations
 from dataclasses import dataclass
 
 def dijkstra(graph: nx.Graph, start: str) -> list[str]:
@@ -15,6 +16,7 @@ def dijkstra(graph: nx.Graph, start: str) -> list[str]:
     Returns:
         list[str]: returns a list with the shortest paths
     """
+
     distance = {node: float('infinity') for node in graph}
     distance[start] = 0
     priority_queue = [(0, start)]
