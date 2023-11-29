@@ -45,7 +45,7 @@ def visualize_graph(graph) -> None:
     """Plots the graph using MatPlotLib library. 
 
     Args:
-        graph (graph): Input graph from NetworkX library that contains edges and vertices, mimicking the actual graph data structure. Implemented using an
+        graph (Graph): Input graph from NetworkX library that contains edges and vertices, mimicking the actual graph data structure. Implemented using an
         adjacency list.
     Returns:
         None
@@ -56,7 +56,14 @@ def visualize_graph(graph) -> None:
     nx.draw_networkx_edge_labels(graph, pos, edge_labels=labels)
     plt.show()
 
-def init_parser():
+def init_parser() -> argparse.ArgumentParser:
+    """Initializes an argument parser so that the user can provide Command Line arguments to configure the program how they choose.
+
+    Args:
+        None
+    Returns:
+        ArgumentParser: parser object to be used for taking in CLI args.
+    """
     parser = argparse.ArgumentParser(description="Options for choosing which restaurants to add")
     parser.add_argument('-debug', action='store_true', help='Activate Debug Mode to see relationships between all Nodes and Edges.')
 
@@ -71,6 +78,17 @@ def init_parser():
     return parser
 
 def handle_locations(args, edges: list[dict], locations:list[str]) -> tuple:
+    """Handles all processing of which locations to add to the list based on what the user provides in the CLI. 
+
+    Args:
+        args: argument list to process.
+        edges (list[dict]): empty list
+        locations (list[str]): empty list
+
+    Returns:
+        tuple: Returns a tuple of (edges, locations) to be unpacked by the caller, where both elements are lists.
+    """
+    #Chipotle
     if args.c:
         locations.extend(Locations.chipotle_locations)
         edges.extend(Locations.chipotle_edges)
@@ -80,13 +98,15 @@ def handle_locations(args, edges: list[dict], locations:list[str]) -> tuple:
         locations.extend(Locations.moes_locations)
         edges.extend(Locations.moes_edges)
         
-        #MOES
+     #MOES
     if args.m:
         locations.extend(Locations.willys_locations)
         edges.extend(Locations.willys_edges)
     
-    locations.extend(Locations.all_locations)
-    edges.extend(Locations.all_edges)
+    # All locations;
+    if not args.m and not args.c and not args.w:   
+        locations.extend(Locations.all_locations)
+        edges.extend(Locations.all_edges)
 
     return (edges, locations)
 
