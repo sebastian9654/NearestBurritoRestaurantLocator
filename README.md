@@ -110,7 +110,7 @@ The shortest path to get to C-1 is 5 'miles'.
 
 **2b.**
 
-- The same command with additional argument -debug: `python3 dijkstras.py --choose C-1` will find the shortest path to get to location C-1 (Chipotle 1) from starting point GSU-DOWNTOWN. -debug will produce the same output as shown above in Example 1b.
+- The same command with additional argument -debug: `python3 dijkstras.py --choose C-1 -debug` will find the shortest path to get to location C-1 (Chipotle 1) from starting point GSU-DOWNTOWN. -debug will produce the same output as shown above in Example 1b.
 
 ```bash session
 [13:37] seb ~/Developer/proj % python3 dijkstras.py --choose C-1 -debug
