@@ -2,7 +2,8 @@
 
 ## Overview
 
-This Python script utilizes Dijkstra's Algorithm to help you find the shortest path from your location to the nearest Chipotle, Willy's, or Moe's in the Atlanta Metropolitan Area. The script includes options to customize your search based on restaurant preferences and additional filtering criteria.
+This Python script utilizes Dijkstra's Algorithm to help you find the shortest path from your location to the nearest Chipotle, Willy's, or Moe's in the Atlanta Metropolitan Area. The script includes options to customize your search based on restaurant preferences and additional filtering criteria. When running the script, the user will be provided with 
+a visual representation of the graph, thanks to the MatPlotLib python library. 
 
 ## Installation
 
@@ -27,14 +28,18 @@ Run the script in your terminal or command prompt:
 
 ```bash
 python dijkstras.py [options]
+
+OR
+
+python3 dijkstras.py [options]
 ```
 
 Options:
 
 - **REQUIRED ARGUMENTS** 
     - --choose [restaurant] [other args] OR --nearest [other args]
-        - Note: You must select ***one or the other*** arguments here. A list of all available restaurants along with their 'codes' is provided in this documentation.
-
+        - Note: You must select ***one or the other*** arguments here. A list of all available locations to choose from along with their 'codes' is provided in the next section.
+        - Ensure you use the 'code' when providing a specific location (ex. W-1, M-2, C-4, etc...)
 - **OPTIONAL ARGUMENTS**
     - -c: Include Chipotle in the search.
     - -w: Include Willy's in the search.
@@ -45,7 +50,6 @@ Options:
 
 ## List of Locations
 
-When referencing the chip
 ### Chipotle Locations
 - **C-1**: Ashford Dunwoody Road
 - **C-2**: Chamblee Dunwoody Road
