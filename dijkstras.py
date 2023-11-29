@@ -3,9 +3,10 @@ import matplotlib.pyplot as plt
 import heapq
 import argparse
 
+from networkx import Graph
 from locations import Locations
 
-def dijkstra(graph: nx.Graph, start: str) -> list[str]:
+def dijkstras(graph: Graph, start: str) -> list[str]:
     """Dijkstra's Algorithm. Used to find shortest path within a graph from a start point.
 
     Args:
@@ -40,7 +41,6 @@ def dijkstra(graph: nx.Graph, start: str) -> list[str]:
 
     return distance
 
-
 def visualize_graph(graph) -> None:
     """Plots the graph using MatPlotLib library. 
 
@@ -56,68 +56,78 @@ def visualize_graph(graph) -> None:
     nx.draw_networkx_edge_labels(graph, pos, edge_labels=labels)
     plt.show()
 
-
-def main():
+def init_parser():
     parser = argparse.ArgumentParser(description="Options for choosing which restaurants to add")
-    parser.add_argument('-all', action='store_true', help='Include all restaurants: chipotle, willys, and moes')
+    parser.add_argument('-debug', action='store_true', help='Activate Debug Mode to see relationships between all Nodes and Edges.')
+
+    mutually_exclusive_group = parser.add_mutually_exclusive_group(required=True)
+    mutually_exclusive_group.add_argument('--nearest', action='store_true', help='Set mode to find overall nearest restaurant out of all available on the map.')
+    mutually_exclusive_group.add_argument('--choose', type=str, help='Set mode to find shortest path to a specific given restaurant by the user.')
+
     parser.add_argument('-c', action='store_true', help='Include Chipotle')
     parser.add_argument('-w', action='store_true', help='Include Willys')
     parser.add_argument('-m', action='store_true', help='Include Moes')
-    parser.add_argument('-debug', action='store_true', help='Activate Debug Mode to see relationships between all Nodes and Edges.')
 
+    return parser
+
+def handle_locations(args, edges: list[dict], locations:list[str]) -> tuple:
+    if args.c:
+        locations.extend(Locations.chipotle_locations)
+        edges.extend(Locations.chipotle_edges)
+
+    # WILLYS
+    if args.w:
+        locations.extend(Locations.moes_locations)
+        edges.extend(Locations.moes_edges)
+        
+        #MOES
+    if args.m:
+        locations.extend(Locations.willys_locations)
+        edges.extend(Locations.willys_edges)
+    
+    locations.extend(Locations.all_locations)
+    edges.extend(Locations.all_edges)
+
+    return (edges, locations)
+
+
+def main():
+    parser = init_parser()
     args = parser.parse_args()    # New list of locations
 
     edges_to_include = []
     locations_to_include = []
 
-    if args.all:
-        # Include all restaurants
-        locations_to_include.extend(Locations.all_locations)
-        edges_to_include.extend(Locations.all_edges)
+    handle_locations(args, edges_to_include, locations_to_include)
 
-    else:
-        # Include selected restaurants based on arguments
-        # CHIPOTLE
-        if args.c:
-            locations_to_include.extend(Locations.chipotle_locations)
-            edges_to_include.extend(Locations.chipotle_edges)
+    locations_to_include.append(Locations.gsu)
 
-        # WILLYS
-        if args.w:
-            locations_to_include.extend(Locations.moes_locations)
-            edges_to_include.extend(Locations.moes_edges)
-        
-        #MOES
-        if args.m:
-            locations_to_include.extend(Locations.willys_locations)
-            edges_to_include.extend(Locations.willys_edges)
-
-    # New list of locations
-    locations = locations_to_include + ['GSU-DOWNTOWN']
-
-    graph = nx.Graph()
-    graph.add_nodes_from(locations)
+    graph = Graph()
+    graph.add_nodes_from(locations_to_include)
     graph.add_edges_from(edges_to_include)
-
-    start_location = 'GSU-DOWNTOWN'
 
     # Visualize the new graph
     visualize_graph(graph)
+    start_location = Locations.gsu
 
-    distances = dijkstra(graph, start_location)
+    distances = dijkstras(graph, start_location)
 
-    # Find the nearest location
-    nearest_location = min(distances, key=distances.get)
-    distance_to_nearest_location = distances[nearest_location]
+    if args.nearest:
+        # Find the nearest overall location on the graph.
+        nearest_location = min(distances, key=distances.get)
+        distance_to_nearest_location = distances[nearest_location]
 
-    print(f"The nearest location {nearest_location} is located at the following address: {Locations.locations_with_addresses[nearest_location]}.")
-    print(f"The distance from {start_location} to the nearest location is {distance_to_nearest_location} units.")
+        print(f"The nearest location {nearest_location} is located at the following address: {Locations.locations_with_addresses[nearest_location]}.")
+        print(f"The distance from {start_location} to the nearest location is {distance_to_nearest_location} 'miles'.")
 
-    # Debugging only, prints all distances to see if the algorithm is correct
+    elif args.choose:
+        # Find shortest path to any given restaurant.
+        print(f"The shortest path to get to {args.choose} is {distances[args.choose]} 'miles'.")
+
+    # Debugging only, prints all shortest paths to see if the algorithm is correct
     if args.debug:
         for location, distance in distances.items():
-            print(f"[DEBUG MODE] The distance from {start_location} to {location} is {distance} units.")
-
+            print(f"[DEBUG MODE] The shortest path from {start_location} to {location} is {distance} 'miles'.")
 
 if __name__ == "__main__":
     main()
