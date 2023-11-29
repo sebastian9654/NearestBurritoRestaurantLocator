@@ -27,7 +27,7 @@ class Locations:
 
     chipotle_edges = [
         ('GSU-DOWNTOWN', 'C-1', {'weight': 6}),
-        ('GSU-DOWNTOWN', 'C-3', {'weight': 10}),
+        ('GSU-DOWNTOWN', 'C-3', {'weight': 1}),
         ('C-1', 'C-2', {'weight': 22}),
         ('C-1', 'C-3', {'weight': 4}),
         ('C-2', 'C-4', {'weight': 52}),
@@ -50,6 +50,7 @@ class Locations:
 
     all_edges = chipotle_edges + willys_edges + moes_edges
 
+    gsu = 'GSU-DOWNTOWN'
     chipotle_locations = ['C-1', 'C-2', 'C-3', 'C-4',] 
     willys_locations = ['W-1', 'W-2', 'W-3']
     moes_locations = ['M-1', 'M-2']
