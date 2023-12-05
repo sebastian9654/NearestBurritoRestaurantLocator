@@ -135,6 +135,8 @@ PS C:\Users\Sebastian\Documents\Schoolwork\proj\NearestBurritoRestaurantLocator>
 - Matplotlib: (Version: 3.8.2) Used for graph visualization.
 
 ## Algorithm Details:
+Time Complexity: O(V+E)
+Space Complexity: O(V)
 
 ## Structure
 The project utilizes a data class, Locations, to store information about restaurant edges, locations, and addresses. This allows for easy access to important data and quick modifications.
