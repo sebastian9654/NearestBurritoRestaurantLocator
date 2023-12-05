@@ -146,8 +146,9 @@ def main():
 
     # Debugging only, prints all shortest paths to see if the algorithm is correct
     if args.debug:
+        print(f"The shortest path from GSU-DOWNTOWN to each of the following nodes:")
         for location, distance in distances.items():
-            print(f"[DEBUG MODE] The shortest path from {start_location} to {location} is {distance} 'miles'.")
+            print(f"\t{location}: {distance} 'miles'.")
 
 if __name__ == "__main__":
     main()

@@ -16,13 +16,16 @@ a visual representation of the graph, thanks to the MatPlotLib python library.
 3. Install the required libraries/dependencies using the following command(s):
 
     ```bash
-    pip install -r requirements.txt   
+    pip install networkx
+    pip install matplotlib   
 
     OR
 
-    pip3 install -r requirements.txt    
+    ensure you are in `/NearestBurritoRestaurantLocator directory`
+    pip install -r requirements.txt
     ```
-
+    and ensure you are using the correct interpreter for these dependencies, if in VScode, select python interpreter in the botton right toolbar
+    
 ## Usage
 Run the script in your terminal or command prompt:
 
@@ -81,20 +84,19 @@ The distance from GSU-DOWNTOWN to the nearest location is 1 'miles'.
 - The same command with additional argument -debug: `python3 dijkstras.py --nearest -debug` will locate the nearest overall restaurant from our starting point: GSU-DOWNTOWN. Along with a debug output of all locations and the shortest path to them.
 
 ```bash
-[13:27] seb ~/Developer/proj % python3 dijkstras.py --nearest -debug
+PS C:\Users\Sebastian\Documents\Schoolwork\proj\NearestBurritoRestaurantLocator> python .\dijkstras.py --nearest -debug
 The nearest location C-3 is located at the following address: Buford Highway.
-The distance from GSU-DOWNTOWN to the nearest location is 1 'miles'.
-
-[DEBUG MODE] The shortest path from GSU-DOWNTOWN to C-1 is 5 'miles'.
-[DEBUG MODE] The shortest path from GSU-DOWNTOWN to C-2 is 27 'miles'.
-[DEBUG MODE] The shortest path from GSU-DOWNTOWN to C-3 is 1 'miles'.
-[DEBUG MODE] The shortest path from GSU-DOWNTOWN to C-4 is 22 'miles'.
-[DEBUG MODE] The shortest path from GSU-DOWNTOWN to W-1 is 10 'miles'.
-[DEBUG MODE] The shortest path from GSU-DOWNTOWN to W-2 is 10 'miles'.
-[DEBUG MODE] The shortest path from GSU-DOWNTOWN to W-3 is 24 'miles'.
-[DEBUG MODE] The shortest path from GSU-DOWNTOWN to M-1 is 10 'miles'.
-[DEBUG MODE] The shortest path from GSU-DOWNTOWN to M-2 is 24 'miles'.
-[13:30] seb ~/Developer/proj % 
+The distance from GSU-DOWNTOWN to the nearest location is 5 'miles'.
+The shortest path from GSU-DOWNTOWN to each of the following nodes: 
+        C-1: 6 'miles'.
+        C-2: 15 'miles'.
+        C-3: 5 'miles'.
+        C-4: 8 'miles'.
+        W-1: 18 'miles'.
+        W-2: 13 'miles'.
+        W-3: 9 'miles'.
+        M-1: 16 'miles'.
+        M-2: 20 'miles'.
 ```
 #### Finding the nearest *given location* from Georgia State.
 
@@ -112,25 +114,42 @@ The shortest path to get to C-1 is 5 'miles'.
 
 - The same command with additional argument -debug: `python3 dijkstras.py --choose C-1 -debug` will find the shortest path to get to location C-1 (Chipotle 1) from starting point GSU-DOWNTOWN. -debug will produce the same output as shown above in Example 1b.
 
-```bash session
-[13:37] seb ~/Developer/proj % python3 dijkstras.py --choose C-1 -debug
-The shortest path to get to C-1 is 5 'miles'.
-
-[DEBUG MODE] The shortest path from GSU-DOWNTOWN to C-1 is 5 'miles'.
-[DEBUG MODE] The shortest path from GSU-DOWNTOWN to C-2 is 27 'miles'.
-[DEBUG MODE] The shortest path from GSU-DOWNTOWN to C-3 is 1 'miles'.
-[DEBUG MODE] The shortest path from GSU-DOWNTOWN to C-4 is 22 'miles'.
-[DEBUG MODE] The shortest path from GSU-DOWNTOWN to W-1 is 10 'miles'.
-[DEBUG MODE] The shortest path from GSU-DOWNTOWN to W-2 is 10 'miles'.
-[DEBUG MODE] The shortest path from GSU-DOWNTOWN to W-3 is 24 'miles'.
-[DEBUG MODE] The shortest path from GSU-DOWNTOWN to M-1 is 10 'miles'.
-[DEBUG MODE] The shortest path from GSU-DOWNTOWN to M-2 is 24 'miles'.
-[13:41] seb ~/Developer/proj % 
+```shell
+PS C:\Users\Sebastian\Documents\Schoolwork\proj\NearestBurritoRestaurantLocator> python3 dijkstras.py --choose C-1 -debug
+The shortest path to get to C-1 is 6 'miles'.
+The shortest path from GSU-DOWNTOWN to each of the following nodes:
+        C-1: 6 'miles'.
+        C-2: 15 'miles'.
+        C-3: 5 'miles'.
+        C-4: 8 'miles'.
+        W-1: 18 'miles'.
+        W-2: 13 'miles'.
+        W-3: 9 'miles'.
+        M-1: 16 'miles'.
+        M-2: 20 'miles'.
+PS C:\Users\Sebastian\Documents\Schoolwork\proj\NearestBurritoRestaurantLocator> 
 ```
 ## Libraries Used
 
 - NetworkX: (Version: 3.2.1) Used to represent and manipulate the graph.
 - Matplotlib: (Version: 3.8.2) Used for graph visualization.
 
+## Algorithm Details:
+
 ## Structure
 The project utilizes a data class, Locations, to store information about restaurant edges, locations, and addresses. This allows for easy access to important data and quick modifications.
+
+## TLDR
+
+After cloning repo and installing required libraries for the project to function:
+
+1. Run the script: `python3 dijkstras.py --nearest -debug` to see the nearest location from GSU 
+and also see the shortest distance to all locations
+
+2. Inspect the graph to see the edge weights and vertices.
+
+or
+
+1. Run the script: `python3 dijkstras.py --choose [location] to choose any location on in the list (located in list_of_restaurants.md)`
+
+2. inspect the graph.

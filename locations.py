@@ -27,33 +27,43 @@ class Locations:
 
     chipotle_edges = [
         ('GSU-DOWNTOWN', 'C-1', {'weight': 6}),
-        ('GSU-DOWNTOWN', 'C-3', {'weight': 1}),
-        ('C-1', 'C-2', {'weight': 22}),
-        ('C-1', 'C-3', {'weight': 4}),
-        ('C-2', 'C-4', {'weight': 52}),
-        ('C-3', 'C-4', {'weight': 21}),
-        ('C-1', 'C-4', {'weight': 50}),
+        ('GSU-DOWNTOWN', 'C-3', {'weight': 3}),
+        ('C-1', 'C-2', {'weight': 12}),
+        ('C-1', 'C-3', {'weight': 6}),
+        ('C-2', 'C-4', {'weight': 25}),
+        ('C-3', 'C-4', {'weight': 15}),
+        ('C-1', 'C-4', {'weight': 20}),
+        ('C-2', 'C-3', {'weight': 10}),
+        ('C-3', 'GSU-DOWNTOWN', {'weight': 5}),
+        ('C-4', 'GSU-DOWNTOWN', {'weight': 8}),
+        
     ]
 
     willys_edges = [
-        ('W-1', 'GSU-DOWNTOWN', {'weight': 10}),
-        ('W-1', 'W-2', {'weight': 10}),
-        ('W-2', 'GSU-DOWNTOWN', {'weight': 10}),
-        ('W-3', 'W-2', {'weight': 14}),
+        ('W-1', 'GSU-DOWNTOWN', {'weight': 18}),
+        ('W-1', 'W-2', {'weight': 12}),
+        ('W-2', 'GSU-DOWNTOWN', {'weight': 13}),
+        ('W-3', 'W-2', {'weight': 10}),
+        ('W-1', 'W-3', {'weight': 15}),
+        ('W-3', 'GSU-DOWNTOWN', {'weight': 9}),
+        ('W-2', 'W-3', {'weight': 5}),
+
     ]
 
     moes_edges = [
-        ('M-1','GSU-DOWNTOWN', {'weight': 10}),
-        ('M-2', 'M-1', {'weight': 24}),
-        ('M-2', 'GSU-DOWNTOWN', {'weight': 24}),
+        ('M-1','GSU-DOWNTOWN', {'weight': 16}),
+        ('M-2', 'M-1', {'weight': 20}),
+        ('M-2', 'GSU-DOWNTOWN', {'weight': 20}),
+        ('M-1', 'M-2', {'weight': 10}),
     ]
+
 
     all_edges = chipotle_edges + willys_edges + moes_edges
 
     gsu = 'GSU-DOWNTOWN'
-    chipotle_locations = ['C-1', 'C-2', 'C-3', 'C-4',] 
-    willys_locations = ['W-1', 'W-2', 'W-3']
-    moes_locations = ['M-1', 'M-2']
+    chipotle_locations = ['C-1', 'C-2', 'C-3', 'C-4'] 
+    willys_locations = ['W-1', 'W-2', 'W-3',]
+    moes_locations = ['M-1', 'M-2',]
 
     all_locations = chipotle_locations + willys_locations + moes_locations
 
