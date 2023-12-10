@@ -1,6 +1,7 @@
 # Nearest Burrito Restaurant Locator
 
 ## Overview
+This project was for CSC 4520 - Design and Analysis of Algorithms. Fall 2023 Final Project.
 
 This Python script utilizes Dijkstra's Algorithm to help you find the shortest path from your location to the nearest Chipotle, Willy's, or Moe's in the Atlanta Metropolitan Area. The script includes options to customize your search based on restaurant preferences and additional filtering criteria. When running the script, the user will be provided with 
 a visual representation of the graph, thanks to the MatPlotLib python library. 
